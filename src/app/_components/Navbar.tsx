@@ -52,7 +52,7 @@ function Navbar() {
     <div
       className={`flex justify-between ${
         scrolled ? 'bg-white' : 'bg-transparent'
-      } h-14 items-center font-bold font-mono w-full fixed ease-linear duration-500`}
+      } h-14 items-center font-bold font-mono w-full fixed ease-linear duration-500 z-50`}
     >
       {/* SOCIAL ICONS */}
       {!isNarrowScreen && (
