@@ -12,6 +12,8 @@ const config: Config = {
       'dark-teal': '#183D3D',
       'lighter-teal': '#5C8374',
       'light-teal': '#93B1A6',
+      orange: '#dcd91f',
+      white: '#ffffff',
     },
     extend: {
       backgroundImage: {
