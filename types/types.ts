@@ -1,6 +1,8 @@
 import { FileObject } from '@supabase/storage-js';
 
 export type GetPicturesResponse = {
-    data?: FileObject[];
-    error?: any;
+  data?: {
+    section1: { src: string; width: number; height: number }[] | null;
   };
+  error?: any;
+};
