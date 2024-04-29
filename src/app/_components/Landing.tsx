@@ -1,19 +1,50 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import { GetPicturesResponse } from '../../../types/types';
 import { Abril_Fatface } from 'next/font/google';
 import SquareIcon from '@mui/icons-material/Square';
 import Image from 'next/image';
+import Gallery from 'react-photo-gallery';
+import Carousel, { Modal, ModalGateway } from 'react-images';
 
 const abrilFatface = Abril_Fatface({
   subsets: ['latin'],
   weight: '400',
 });
 
-const Landing = (props?: GetPicturesResponse | undefined) => {
+const photos = [
+  {
+    src: 'https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg',
+    width: 1,
+    height: 1,
+  },
+  {
+    src: 'https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg',
+    width: 1,
+    height: 1,
+  },
+];
+
+const Landing = (props: GetPicturesResponse | undefined) => {
+  console.log(props);
   const [showFadeIns, setShowFadeIns] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const elementsRef = useRef<Array<HTMLDivElement | null>>([]);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+  const openLightbox = useCallback(
+    (event: any, { index }: { index: number }) => {
+      setCurrentImage(index);
+      setViewerIsOpen(true);
+    },
+    []
+  );
+
+  const closeLightbox = () => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
 
   const generateImageStyles = (
     picNumber: any,
@@ -36,7 +67,8 @@ const Landing = (props?: GetPicturesResponse | undefined) => {
     return imageStyle;
   };
 
-  const parallaxFactor = 0.1;
+  // was 0.1
+  const parallaxFactor = 0.03;
 
   const parallaxStyles = {
     backgroundImage: `url('https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg')`,
@@ -184,7 +216,7 @@ const Landing = (props?: GetPicturesResponse | undefined) => {
           style={generateImageStyles('3', 'center', '36%', 'fit-content', true)}
           className='full-width bg-black flex flex-col-reverse lg:grid grid-cols-2 p-10 items-center'
         >
-          <div className='bg-black bg-opacity-70 p-2'>
+          <div className='bg-black bg-opacity-70 p-2 rounded-lg'>
             <h1 className='text-[2rem] white font-semibold text-orange'>
               About The Photographer
             </h1>
@@ -219,15 +251,67 @@ const Landing = (props?: GetPicturesResponse | undefined) => {
               width={400}
               height={0}
               className='rounded-xl object-cover mb-2 lg:mb-0'
+              loading='lazy'
             />
           </div>
         </div>
       </section>
       <section>
         <div
-          style={generateImageStyles('1', 'center', '36%', '100vh', true)}
-          className='full-width bg-black grid grid-cols-2 p-10'
-        ></div>
+          style={generateImageStyles('4', 'center', '36%', 'fit-content', true)}
+          className='full-width bg-black p-10'
+        >
+          {props && props.data && props.data.section1 && (
+            <div className='flex justify-center align-middle'>
+              <Gallery photos={props?.data.section1} onClick={openLightbox} />
+              <ModalGateway>
+                {viewerIsOpen ? (
+                  <Modal onClose={closeLightbox}>
+                    <Carousel
+                      currentIndex={currentImage}
+                      views={
+                        props?.data?.section1.map((x) => ({
+                          ...x,
+                        })) || []
+                      }
+                    />
+                  </Modal>
+                ) : null}
+              </ModalGateway>
+            </div>
+          )}
+        </div>
+      </section>
+      <section>
+        <div
+          style={generateImageStyles(
+            'cars',
+            'center',
+            '36%',
+            'fit-content',
+            true
+          )}
+          className='full-width p-10'
+        >
+          <h1 className='text-4xl text-center font-extrabold tracking-widest bg-black bg-opacity-70 rounded-lg py-1'>
+            SERVICES
+          </h1>
+          <div className='mt-10 bg-black bg-opacity-70 p-2 rounded-lg'>
+            <ol>
+              <h1 className='font-bold text-xl text-orange'>PHOTOGRAPHY</h1>
+              <li>
+                Possible in all types of weather conditions and lighting
+                settings.
+              </li>
+              <div className='pl-5'>
+                <h1 className='mt-2 text-orange'>Photography Gear</h1>
+                <li>- Canon R6 Mark ii</li>
+                <li>- Canon 24-105mm Lens + UV Filter</li>
+                <li>- 24.2 MB images</li>
+              </div>
+            </ol>
+          </div>
+        </div>
       </section>
     </div>
   );
