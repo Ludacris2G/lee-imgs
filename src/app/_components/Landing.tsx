@@ -6,6 +6,7 @@ import SquareIcon from '@mui/icons-material/Square';
 import Image from 'next/image';
 import Gallery from 'react-photo-gallery';
 import Carousel, { Modal, ModalGateway } from 'react-images';
+import Link from 'next/link';
 
 const abrilFatface = Abril_Fatface({
   subsets: ['latin'],
@@ -291,26 +292,70 @@ const Landing = (props: GetPicturesResponse | undefined) => {
             'fit-content',
             true
           )}
-          className='full-width p-10'
+          className='full-width p-10 lg:px-[20%]'
         >
-          <h1 className='text-4xl text-center font-extrabold tracking-widest bg-black bg-opacity-70 rounded-lg py-1'>
+          <h1 className='text-4xl lg:text-6xl text-center font-extrabold tracking-widest bg-black bg-opacity-70 rounded-lg py-1'>
             SERVICES
           </h1>
           <div className='mt-10 bg-black bg-opacity-70 p-2 rounded-lg'>
-            <ol>
-              <h1 className='font-bold text-xl text-orange'>PHOTOGRAPHY</h1>
-              <li>
-                Possible in all types of weather conditions and lighting
-                settings.
-              </li>
-              <div className='pl-5'>
-                <h1 className='mt-2 text-orange'>Photography Gear</h1>
-                <li>- Canon R6 Mark ii</li>
-                <li>- Canon 24-105mm Lens + UV Filter</li>
-                <li>- 24.2 MB images</li>
-              </div>
-            </ol>
+            <h1 className='font-bold text-xl text-orange lg:text-3xl'>
+              PHOTOGRAPHY
+            </h1>
+            <li>
+              Possible in all types of weather conditions and lighting settings.
+              Final product is delivered in JPG format after the Lightroom
+              post-processing of the RAW files.
+            </li>
+            <div className='pl-5'>
+              <h1 className='mt-2 text-orange font-bold lg:text-3xl'>
+                PHOTOGRAPHY GEAR
+              </h1>
+              <li>Canon R6 Mark ii</li>
+              <li>Canon 24-105mm Lens + UV Filter</li>
+              <li>24.2 MP</li>
+            </div>
           </div>
+          <div className='mt-10 bg-black bg-opacity-70 p-2 rounded-lg'>
+            <h1 className='font-bold text-xl text-orange lg:text-3xl'>
+              VIDEOGRAPHY
+            </h1>
+            <li>
+              Can be done to accomodate any type of visual storytelling, whether
+              it's content for social media like Instagram (vertical) or
+              cinematic masterpieces for platforms like YouTube (horizontal).
+              This can include timelapsing, slow motion (120fps) or any other
+              modes.
+            </li>
+            <div className='pl-5'>
+              <h1 className='mt-2 text-orange font-bold lg:text-3xl'>
+                PHOTOGRAPHY GEAR
+              </h1>
+              <li>Up to 4K 60FPS video recording</li>
+              <li>Dual Pixel CMOS AF for precise focusing</li>
+              <li>
+                Dual in-body and in-lens image stabilization for smooth footage
+              </li>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div
+          style={generateImageStyles(
+            'mountains',
+            'center',
+            '36%',
+            'fit-content',
+            false
+          )}
+          className='full-width p-10 lg:px-[20%] flex flex-col'
+        >
+          <h1 className='text-7xl text-center mb-4'>GALLERY</h1>
+          <Link href='/gallery' className='mx-auto'>
+            <button className='mx-auto border p-3 hover:bg-white hover:text-black transition-all duration-300 text-2xl'>
+              STILLS
+            </button>
+          </Link>
         </div>
       </section>
     </div>
