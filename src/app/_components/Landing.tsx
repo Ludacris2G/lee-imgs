@@ -5,7 +5,6 @@ import { Abril_Fatface } from 'next/font/google';
 import SquareIcon from '@mui/icons-material/Square';
 import Image from 'next/image';
 import Gallery from 'react-photo-gallery';
-import Carousel, { Modal, ModalGateway } from 'react-images';
 import Link from 'next/link';
 
 const abrilFatface = Abril_Fatface({
@@ -265,7 +264,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           {props && props.data && props.data.section1 && (
             <div className='flex justify-center align-middle'>
               <Gallery photos={props?.data.section1} onClick={openLightbox} />
-              <ModalGateway>
+              {/* <ModalGateway>
                 {viewerIsOpen ? (
                   <Modal onClose={closeLightbox}>
                     <Carousel
@@ -278,7 +277,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                     />
                   </Modal>
                 ) : null}
-              </ModalGateway>
+              </ModalGateway> */}
             </div>
           )}
         </div>
