@@ -5,17 +5,20 @@ import { Abril_Fatface } from 'next/font/google';
 import SquareIcon from '@mui/icons-material/Square';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Gallery } from 'next-gallery';
+import { PhotoAlbum } from 'react-photo-album';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 const abrilFatface = Abril_Fatface({
   subsets: ['latin'],
   weight: '400',
 });
 
-const photos = [
+const images = [
   {
     src: 'https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg',
-    width: 1,
-    height: 1,
+    width: 1600,
+    height: 800,
   },
   {
     src: 'https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg',
@@ -23,6 +26,9 @@ const photos = [
     height: 1,
   },
 ];
+
+const widths = [500, 1000];
+const ratios = [1, 2, 6];
 
 const Landing = (props: GetPicturesResponse | undefined) => {
   console.log(props);
@@ -32,13 +38,10 @@ const Landing = (props: GetPicturesResponse | undefined) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
-  const openLightbox = useCallback(
-    (event: any, { index }: { index: number }) => {
-      setCurrentImage(index);
-      setViewerIsOpen(true);
-    },
-    []
-  );
+  const openLightbox = useCallback((index: number) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  }, []);
 
   const closeLightbox = () => {
     setCurrentImage(0);
@@ -130,7 +133,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       {/* LANDING */}
       <section className='bg-black z-10 overflow-hidden'>
         <div
-          style={generateImageStyles('1', 'center', '36%', '100vh', true)}
+          style={generateImageStyles('1', 'center', '36%', '100vh', false)}
           className='full-width bg-black relative'
         >
           <h1
@@ -159,8 +162,8 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       {/* PHOTOGRAPHER */}
       <section className='bg-black'>
         <div
-          style={generateImageStyles('2', 'center', '36%', '100vh', true)}
-          className='flex flex-col align-middle justify-center x-bg-layer-lower-image'
+          style={generateImageStyles('2', 'center', '36%', '100vh', false)}
+          className='flex flex-col align-middle justify-center'
         >
           <h1
             ref={(el) => (elementsRef.current[3] = el)}
@@ -273,7 +276,40 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           className='full-width bg-black p-10'
         >
           {props && props.data && props.data.section1 && (
-            <div className='flex justify-center align-middle'>
+            <div className=''>
+              {/* <PhotoAlbum layout='rows' photos={images} /> */}
+              <ResponsiveMasonry
+                columnsCountBreakPoints={{ 350: 3, 750: 3, 900: 4 }}
+              >
+                <Masonry gutter='10px'>
+                  {props.data.section1.map((img, index) => (
+                    <img src={img.src} onClick={() => openLightbox(index)} />
+                  ))}
+                </Masonry>
+              </ResponsiveMasonry>
+              {viewerIsOpen && (
+                <div className='lightbox-modal' onClick={closeLightbox}>
+                  <div className='lightbox-content'>
+                    <img
+                      src={props.data.section1[currentImage].src}
+                      alt={`Image ${currentImage + 1}`}
+                      className='lightbox-image'
+                    />
+                  </div>
+                </div>
+              )}
+              {/* <Gallery {...{ images, widths, ratios }} /> */}
+              {/* <div className='gallery-grid'>
+                {props.data.section1.map((image, index) => (
+                  <div
+                    key={index}
+                    className='gallery-item'
+                    onClick={() => openLightbox(index)}
+                  >
+                    <img src={image.src} />
+                  </div>
+                ))}
+              </div> */}
               {/* <Gallery photos={props?.data.section1} onClick={openLightbox} /> */}
               {/* <ModalGateway>
                 {viewerIsOpen ? (
@@ -302,7 +338,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
             'fit-content',
             false
           )}
-          className='full-width p-10 lg:px-[20%]'
+          className='p-3 lg:px-[20%]'
         >
           <h1 className='text-4xl lg:text-6xl text-center font-extrabold tracking-widest bg-black bg-opacity-70 rounded-lg py-1'>
             SERVICES
@@ -360,7 +396,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           )}
           className='full-width p-10 lg:px-[20%] flex flex-col'
         >
-          <h1 className='text-7xl text-center mb-4'>GALLERY</h1>
+          <h1 className='text-6xl text-center mb-4'>GALLERY</h1>
           <Link href='/gallery' className='mx-auto'>
             <button className='mx-auto border p-3 hover:bg-white hover:text-black transition-all duration-300 text-2xl'>
               STILLS
@@ -368,12 +404,12 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           </Link>
         </div>
       </section>
-      <section>
+      {/* <section>
         <div className='sticky-img parallax-img'>
-          <h1>test</h1>
+        <h1>test</h1>
         </div>
         <h1>test</h1>
-      </section>
+      </section> */}
     </div>
   );
 };
