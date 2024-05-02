@@ -351,14 +351,14 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       </section>
       <section>
         <div
-          style={generateImageStyles(
-            'mountains',
-            'center',
-            '36%',
-            'fit-content',
-            false
-          )}
-          className='full-width p-10 lg:px-[20%] flex flex-col'
+          // style={generateImageStyles(
+          //   'mountains',
+          //   'center',
+          //   '36%',
+          //   'fit-content',
+          //   false
+          // )}
+          className='full-width p-10 lg:px-[20%] flex flex-col parallax-img'
         >
           <h1 className='text-7xl text-center mb-4'>GALLERY</h1>
           <Link href='/gallery' className='mx-auto'>
