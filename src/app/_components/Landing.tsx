@@ -55,11 +55,11 @@ const Landing = (props: GetPicturesResponse | undefined) => {
     const imageStyle = {
       backgroundImage: `url('https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/${picNumber}.jpg')`,
       backgroundAttachment: `${isFixed ? 'fixed' : ''}`,
-      backgroundPosition: !isFixed
-        ? `${horizontalPosition} ${verticalPosition}`
-        : `${horizontalPosition} ${100 - scrollPosition * parallaxFactor}%`,
+      // backgroundPosition: !isFixed
+      //   ? `${horizontalPosition} ${verticalPosition}`
+      //   : `${horizontalPosition} ${100 - scrollPosition * parallaxFactor}%`,
       backgroundRepeat: 'no-repeat',
-      backgroundSize: 'inherit',
+      backgroundSize: 'cover',
       height: `${height}`,
     };
 
