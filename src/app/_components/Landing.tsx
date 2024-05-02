@@ -159,7 +159,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       {/* PHOTOGRAPHER */}
       <section className='bg-black'>
         <div
-          style={generateImageStyles('2', 'center', '36%', '100vh', true)}
+          style={generateImageStyles('2', 'center', '36%', '100vh', false)}
           className='flex flex-col align-middle justify-center'
         >
           <h1
@@ -212,7 +212,13 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       {/* ABOUT */}
       <section className=''>
         <div
-          style={generateImageStyles('3', 'center', '36%', 'fit-content', true)}
+          style={generateImageStyles(
+            '3',
+            'center',
+            '36%',
+            'fit-content',
+            false
+          )}
           className='full-width bg-black flex flex-col-reverse lg:grid grid-cols-2 p-10 items-center'
         >
           <div className='bg-black bg-opacity-70 p-2 rounded-lg'>
@@ -257,7 +263,13 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       </section>
       <section>
         <div
-          style={generateImageStyles('4', 'center', '36%', 'fit-content', true)}
+          style={generateImageStyles(
+            '4',
+            'center',
+            '36%',
+            'fit-content',
+            false
+          )}
           className='full-width bg-black p-10'
         >
           {props && props.data && props.data.section1 && (
