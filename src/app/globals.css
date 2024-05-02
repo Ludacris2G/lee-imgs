@@ -60,3 +60,10 @@ body {
   display: inline-block;
   left: 50%;
 }
+
+@media (max-width: 767px) {
+  .x-bg-layer-lower-image {
+    background-attachment: fixed !important;
+    background-size: contain !important;
+  }
+}

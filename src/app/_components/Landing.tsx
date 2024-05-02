@@ -160,7 +160,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       <section className='bg-black'>
         <div
           style={generateImageStyles('2', 'center', '36%', '100vh', true)}
-          // className='flex flex-col align-middle justify-center'
+          className='flex flex-col align-middle justify-center x-bg-layer-lower-image'
         >
           <h1
             ref={(el) => (elementsRef.current[3] = el)}
