@@ -83,7 +83,7 @@ body {
   background-repeat: no-repeat;
   -webkit-background-repeat: no-repeat;
   -moz-background-repeat: no-repeat;
-  background-position: 50% 1000px;
+  /* background-position: 50% 1000px; */
   top: 0;
 }
 

@@ -351,14 +351,14 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       </section>
       <section>
         <div
-          // style={generateImageStyles(
-          //   'mountains',
-          //   'center',
-          //   '36%',
-          //   'fit-content',
-          //   false
-          // )}
-          className='full-width p-10 lg:px-[20%] flex flex-col parallax-img'
+          style={generateImageStyles(
+            'mountains',
+            'center',
+            '36%',
+            'fit-content',
+            false
+          )}
+          className='full-width p-10 lg:px-[20%] flex flex-col'
         >
           <h1 className='text-7xl text-center mb-4'>GALLERY</h1>
           <Link href='/gallery' className='mx-auto'>
@@ -367,6 +367,12 @@ const Landing = (props: GetPicturesResponse | undefined) => {
             </button>
           </Link>
         </div>
+      </section>
+      <section>
+        <div className='fixed-img parallax-img'>
+          <h1>test</h1>
+        </div>
+        <h1>test</h1>
       </section>
     </div>
   );
