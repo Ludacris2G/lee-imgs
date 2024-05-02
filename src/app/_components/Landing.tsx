@@ -60,7 +60,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
         : `${horizontalPosition} ${100 - scrollPosition * parallaxFactor}%`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
-      height: `1000px`,
+      height: `${height}`,
     };
 
     return imageStyle;
@@ -130,7 +130,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       {/* LANDING */}
       <section className='bg-black z-10 overflow-hidden'>
         <div
-          style={generateImageStyles('1', 'center', '36%', '100vh', false)}
+          style={generateImageStyles('1', 'center', '36%', '100vh', true)}
           className='full-width bg-black relative'
         >
           <h1
