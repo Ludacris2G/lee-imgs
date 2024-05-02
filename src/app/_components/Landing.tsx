@@ -131,7 +131,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       <section className='bg-black z-10 overflow-hidden'>
         <div
           style={generateImageStyles('1', 'center', '36%', '100vh', false)}
-          className='full-width bg-black'
+          className='full-width bg-black relative'
         >
           <h1
             ref={(el) => (elementsRef.current[1] = el)}
@@ -141,15 +141,15 @@ const Landing = (props: GetPicturesResponse | undefined) => {
             EXPLORE
           </h1>
           <div
-            className='absolute bottom-0 w-full overflow-hidden'
+            className='w-full overflow-hidden absolute bottom-0'
             ref={(el) => (elementsRef.current[2] = el)}
           >
-            <div className='h-[200px] flex justify-center'>
+            <div className='flex justify-center'>
               <SquareIcon
                 className={`h-[100px] scale-x-[.5] scale-y-[90] opacity-70 transition-opacity duration-1000`}
                 style={{
                   height: showFadeIns ? '200px' : '0',
-                  transition: 'height 10s ease',
+                  transition: 'height 1s ease',
                 }}
               />
             </div>
