@@ -60,7 +60,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
         : `${horizontalPosition} ${100 - scrollPosition * parallaxFactor}%`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
-      height: `${height}`,
+      height: `1000px`,
     };
 
     return imageStyle;
@@ -75,8 +75,8 @@ const Landing = (props: GetPicturesResponse | undefined) => {
     // backgroundPosition: 'center 100%',
     backgroundPosition: `center ${100 - scrollPosition * parallaxFactor}%`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    height: '100vh',
+    backgroundSize: '100%',
+    height: '100%',
   };
 
   useEffect(() => {

@@ -61,10 +61,10 @@ body {
   left: 50%;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .x-bg-layer-lower-image {
     background-attachment: fixed !important;
     background-size: contain !important;
     background-size: cover !important;
   }
-}
+} */
