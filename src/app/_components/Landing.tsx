@@ -59,7 +59,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
         ? `${horizontalPosition} ${verticalPosition}`
         : `${horizontalPosition} ${100 - scrollPosition * parallaxFactor}%`,
       backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
+      backgroundSize: 'contain',
       height: `${height}`,
     };
 
