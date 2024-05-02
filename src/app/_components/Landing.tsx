@@ -300,7 +300,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
             'center',
             '36%',
             'fit-content',
-            true
+            false
           )}
           className='full-width p-10 lg:px-[20%]'
         >
