@@ -61,37 +61,50 @@ body {
   left: 50%;
 }
 
-@media (max-width: 767px) {
-  .x-bg-layer-lower-image {
-    background-attachment: fixed !important;
-    background-size: contain !important;
-    background-size: cover !important;
-  }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(150px, 1fr)
+  ); /* Responsive grid */
+  gap: 10px;
 }
 
-.parallax-img {
-  background-image: url('https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg');
+/* Add this CSS to your existing stylesheets or create a new stylesheet */
 
-  /* -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  background-attachment: fixed;
-  -webkit-background-attachment: fixed;
-  -moz-background-attachment: fixed;
-  height: 100vh;
-  background-repeat: no-repeat;
-  -webkit-background-repeat: no-repeat;
-  -moz-background-repeat: no-repeat;
-  top: 0; */
+.lightbox-gallery {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.sticky-img {
-  margin-top: -100vh;
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(45deg, red, blue);
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
-  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.lightbox-content {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  display: block;
+  margin: auto;
 }
