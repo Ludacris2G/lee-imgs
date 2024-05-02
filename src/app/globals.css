@@ -73,12 +73,21 @@ body {
   background-image: url('https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg');
 
   /* Set a specific height */
-  min-height: 500px;
-
-  /* Create the parallax scrolling effect */
-  background-attachment: scroll;
-  background-position: center;
-  background-repeat: no-repeat;
-  /* background-size: cover; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
+  -webkit-background-attachment: fixed;
+  -moz-background-attachment: fixed;
+  top: 0;
+}
+
+.sticky-img {
+  margin-top: -100vh;
+  width: 100vw;
+  height: 100vh;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 0;
 }
