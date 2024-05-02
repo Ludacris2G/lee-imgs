@@ -157,11 +157,11 @@ const Landing = (props: GetPicturesResponse | undefined) => {
         </div>
       </section>
       {/* PHOTOGRAPHER */}
-      <section
-        className='bg-black'
-        style={generateImageStyles('2', 'center', '36%', '100vh', true)}
-      >
-        <div className='flex flex-col align-middle justify-center'>
+      <section className='bg-black'>
+        <div
+          style={generateImageStyles('2', 'center', '36%', '100vh', true)}
+          // className='flex flex-col align-middle justify-center'
+        >
           <h1
             ref={(el) => (elementsRef.current[3] = el)}
             className={`z-20 opacity-0 text-[2em] sm:text-[3em] lg:text-[3em]  font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]  top-10 text-center
