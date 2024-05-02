@@ -159,7 +159,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       {/* PHOTOGRAPHER */}
       <section className='bg-black'>
         <div
-          style={generateImageStyles('2', 'center', '36%', '100vh', false)}
+          style={generateImageStyles('2', 'center', '36%', '100vh', true)}
           className='flex flex-col align-middle justify-center'
         >
           <h1
