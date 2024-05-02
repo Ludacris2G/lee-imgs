@@ -369,7 +369,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
         </div>
       </section>
       <section>
-        <div className='fixed-img parallax-img'>
+        <div className='sticky-img parallax-img'>
           <h1>test</h1>
         </div>
         <h1>test</h1>

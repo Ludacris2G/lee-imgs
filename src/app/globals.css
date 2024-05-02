@@ -72,8 +72,7 @@ body {
 .parallax-img {
   background-image: url('https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg');
 
-  /* Set a specific height */
-  -webkit-background-size: cover;
+  /* -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   background-attachment: fixed;
@@ -83,14 +82,14 @@ body {
   background-repeat: no-repeat;
   -webkit-background-repeat: no-repeat;
   -moz-background-repeat: no-repeat;
-  /* background-position: 50% 1000px; */
-  top: 0;
+  top: 0; */
 }
 
 .sticky-img {
   margin-top: -100vh;
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(45deg, red, blue);
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
