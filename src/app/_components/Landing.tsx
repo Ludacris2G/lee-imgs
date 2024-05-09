@@ -444,7 +444,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
             </h1>
             <li>
               Can be done to accomodate any type of visual storytelling, whether
-              it's content for social media like Instagram (vertical) or
+              it&apos;s content for social media like Instagram (vertical) or
               cinematic masterpieces for platforms like YouTube (horizontal).
               This can include timelapsing, slow motion (120fps) or any other
               modes.
