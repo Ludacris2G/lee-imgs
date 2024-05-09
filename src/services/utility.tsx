@@ -15,7 +15,7 @@ export const getPictures = async (): Promise<
     const { data: section1, error } = await supabase.storage
       .from('landing')
       .list('landing-gallery', {
-        limit: 101,
+        limit: 104,
         offset: 0,
         sortBy: { column: 'name', order: 'asc' },
       });
