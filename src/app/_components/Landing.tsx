@@ -361,7 +361,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                     />
                   ))}
                 </Masonry>
-                <Image src='/assets/2.jpg' alt='' width={1000} height={1000} />
+                <Image src='/2.jpg' alt='' width={1000} height={1000} />
               </ResponsiveMasonry>
               {viewerIsOpen && (
                 <div className='lightbox-modal' onClick={closeLightbox}>
