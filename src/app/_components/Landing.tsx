@@ -79,7 +79,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
     isFixed: boolean
   ) => {
     const imageStyle = {
-      backgroundImage: `url('https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/${picNumber}.jpg')`,
+      backgroundImage: `/assets/${picNumber}.jpg`,
       backgroundAttachment: `${isFixed ? 'fixed' : ''}`,
       backgroundPosition: !isFixed
         ? `${horizontalPosition} ${verticalPosition}`
@@ -95,15 +95,15 @@ const Landing = (props: GetPicturesResponse | undefined) => {
   // was 0.1
   const parallaxFactor = 0.03;
 
-  const parallaxStyles = {
-    backgroundImage: `../_assets/structures/2.jpg`,
-    backgroundAttachment: 'fixed',
-    // backgroundPosition: 'center 100%',
-    backgroundPosition: `center ${100 - scrollPosition * parallaxFactor}%`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100%',
-    height: '100%',
-  };
+  // const parallaxStyles = {
+  //   backgroundImage: `../_assets/structures/2.jpg`,
+  //   backgroundAttachment: 'fixed',
+  //   // backgroundPosition: 'center 100%',
+  //   backgroundPosition: `center ${100 - scrollPosition * parallaxFactor}%`,
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundSize: '100%',
+  //   height: '100%',
+  // };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -361,6 +361,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                     />
                   ))}
                 </Masonry>
+                <Image src='/assets/2.jpg' alt='' width={1000} height={1000} />
               </ResponsiveMasonry>
               {viewerIsOpen && (
                 <div className='lightbox-modal' onClick={closeLightbox}>
