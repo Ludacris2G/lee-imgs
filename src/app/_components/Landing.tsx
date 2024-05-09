@@ -5,9 +5,13 @@ import { Abril_Fatface } from 'next/font/google';
 import SquareIcon from '@mui/icons-material/Square';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Gallery } from 'next-gallery';
-import { PhotoAlbum } from 'react-photo-album';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import EmailIcon from '@mui/icons-material/Email';
+import CodeIcon from '@mui/icons-material/Code';
+import CameraIcon from '@mui/icons-material/Camera';
+import MenuIcon from '@mui/icons-material/Menu';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const abrilFatface = Abril_Fatface({
   subsets: ['latin'],
@@ -35,8 +39,27 @@ const Landing = (props: GetPicturesResponse | undefined) => {
   const [showFadeIns, setShowFadeIns] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const elementsRef = useRef<Array<HTMLDivElement | null>>([]);
+  const elementsRefY = useRef<Array<HTMLDivElement | null>>([]);
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+  const aboutSectionRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToAbout = () => {
+    aboutSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleCopyEmail = () => {
+    const email = 'lee.imgsx@gmail.com';
+    navigator.clipboard
+      .writeText(email)
+      .then(() => {
+        alert('Email copied to clipboard!');
+      })
+      .catch((error) => {
+        console.error('Unable to copy to clipboard', error);
+      });
+  };
 
   const openLightbox = useCallback((index: number) => {
     setCurrentImage(index);
@@ -73,7 +96,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
   const parallaxFactor = 0.03;
 
   const parallaxStyles = {
-    backgroundImage: `url('https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg')`,
+    backgroundImage: `../_assets/structures/2.jpg')`,
     backgroundAttachment: 'fixed',
     // backgroundPosition: 'center 100%',
     backgroundPosition: `center ${100 - scrollPosition * parallaxFactor}%`,
@@ -128,6 +151,34 @@ const Landing = (props: GetPicturesResponse | undefined) => {
     };
   });
 
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3,
+    };
+
+    const observerY = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('pop-up');
+        } else {
+          entry.target.classList.remove('pop-up');
+        }
+      });
+    }, options);
+
+    elementsRefY.current.forEach((ref) => {
+      if (ref) {
+        observerY.observe(ref);
+      }
+    });
+
+    return () => {
+      observerY.disconnect();
+    };
+  });
+
   return (
     <div className='full-width'>
       {/* LANDING */}
@@ -166,46 +217,56 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           className='flex flex-col align-middle justify-center'
         >
           <h1
-            ref={(el) => (elementsRef.current[3] = el)}
-            className={`z-20 opacity-0 text-[2em] sm:text-[3em] lg:text-[3em]  font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]  top-10 text-center
+            ref={(el) => (elementsRefY.current[3] = el)}
+            className={`z-20 opacity-0 text-[2em] sm:text-[3em] lg:text-[3em]  font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]  top-10 text-center translate-y-[10px]
             `}
           >
             Freezing Time, Unveiling Memories
           </h1>
-          <button className='mb-20 lg:mb-5 mt-10 border-2 w-auto p-2 rounded-md m-auto hover:bg-white hover:text-black'>
+          <a
+            onClick={scrollToAbout}
+            className='mb-20 lg:mb-5 mt-10 border-2 w-auto p-2 rounded-md m-auto hover:bg-white hover:text-black cursor-pointer translate-y-[10px] opacity-0'
+            ref={(el) => (elementsRefY.current[1] = el)}
+          >
             DISCOVER
-          </button>
+          </a>
           <div className='flex justify-center items-center flex-col relative'>
             <div className='flex flex-row'>
               <div className='z-10'>
                 <Image
-                  ref={(el) => (elementsRef.current[4] = el)}
+                  ref={(el) => (elementsRefY.current[4] = el)}
                   src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.6.jpg'
                   alt='Photographer Picture'
                   width={800}
                   height={0}
-                  className='rounded-xl bg-contain opacity-0 translate-x-[35%] translate-y-[0%] z-10 object-cover transition-opacity duration-[1s]'
+                  className='rounded-xl bg-contain opacity-0 translate-x-[35%] z-10 object-cover transition-opacity duration-[1s] translate-y-[10px]'
+                  loading='lazy'
                 />
               </div>
               <div className=''>
                 {/* CENTER IMAGE */}
                 <Image
-                  ref={(el) => (elementsRef.current[5] = el)}
+                  ref={(el) => (elementsRefY.current[5] = el)}
                   src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.1.jpg'
                   alt='Photographer Picture'
                   width={2000}
                   height={0}
-                  className='rounded-xl bg-contain opacity-0 transition-opacity duration-[1s] lg:max-w-[90%]'
+                  className='rounded-xl bg-contain opacity-0 transition-opacity duration-[1s] lg:max-w-[90%] translate-y-[20px]'
+                  loading='lazy'
                 />
               </div>
-              <div>
+              <div
+                ref={(el) => (elementsRefY.current[2] = el)}
+                className='translate-y-[20px]'
+              >
                 <Image
                   ref={(el) => (elementsRef.current[6] = el)}
                   src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.2.jpg'
                   alt='Photographer Picture'
                   width={800}
                   height={0}
-                  className='rounded-xl bg-contain opacity-0 translate-x-[-29%] translate-y-[-14%] transition-opacity duration-[1s]'
+                  className='rounded-xl bg-contain opacity-0 translate-x-[-29%] translate-y-[-14%]'
+                  loading='lazy'
                 />
               </div>
             </div>
@@ -213,7 +274,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
         </div>
       </section>
       {/* ABOUT */}
-      <section className=''>
+      <section id='about' ref={aboutSectionRef} className=''>
         <div
           style={generateImageStyles(
             '3',
@@ -225,11 +286,17 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           className='full-width bg-black flex flex-col-reverse lg:grid grid-cols-2 p-10 items-center'
         >
           <div className='bg-black bg-opacity-70 p-2 rounded-lg'>
-            <h1 className='text-[2rem] white font-semibold text-orange'>
+            <h1
+              ref={(el) => (elementsRefY.current[6] = el)}
+              className='text-[2rem] white font-semibold text-orange translate-y-[20px] opacity-0'
+            >
               About The Photographer
             </h1>
             <br />
-            <p className='center'>
+            <p
+              ref={(el) => (elementsRefY.current[7] = el)}
+              className='center opacity-0'
+            >
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
               temporibus dolore numquam eveniet perferendis mollitia! Ipsam
               aliquid optio doloribus harum quidem provident, distinctio,
@@ -253,12 +320,12 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           </div>
           <div className='flex justify-center'>
             <Image
-              ref={(el) => (elementsRef.current[7] = el)}
+              ref={(el) => (elementsRefY.current[8] = el)}
               src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/3.1.jpg'
               alt='Photographer Picture'
-              width={400}
+              width={300}
               height={0}
-              className='rounded-xl object-cover mb-2 lg:mb-0'
+              className='rounded-xl object-cover mb-2 lg:mb-0 translate-y-[20px] opacity-0'
               loading='lazy'
             />
           </div>
@@ -283,7 +350,11 @@ const Landing = (props: GetPicturesResponse | undefined) => {
               >
                 <Masonry gutter='10px'>
                   {props.data.section1.map((img, index) => (
-                    <img src={img.src} onClick={() => openLightbox(index)} />
+                    <img
+                      src={img.src}
+                      onClick={() => openLightbox(index)}
+                      loading='lazy'
+                    />
                   ))}
                 </Masonry>
               </ResponsiveMasonry>
@@ -404,12 +475,28 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           </Link>
         </div>
       </section>
-      {/* <section>
-        <div className='sticky-img parallax-img'>
-        <h1>test</h1>
+      <footer className='h-80 flex justify-center align-middle'>
+        <div className='flex space-x-2 pl-4 text-black'>
+          <a target='_blank' href='https://www.instagram.com/lee.imgs/'>
+            <InstagramIcon />
+          </a>
+          <a href='#' onClick={() => handleCopyEmail()}>
+            <EmailIcon />
+          </a>
+          <a target='_blank' href='https://ludacris2g.github.io/'>
+            <CodeIcon />
+          </a>
+          <a
+            target='_blank'
+            href='https://www.youtube.com/channel/UCNA0BgcHQbIHaCXo6Hb5p4w'
+          >
+            <YouTubeIcon />
+          </a>
         </div>
-        <h1>test</h1>
-      </section> */}
+        <div>
+          <h1>© 2024 // @Lee.imgs</h1>
+        </div>
+      </footer>
     </div>
   );
 };
