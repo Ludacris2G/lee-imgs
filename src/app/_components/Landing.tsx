@@ -354,6 +354,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                       src={img.src}
                       onClick={() => openLightbox(index)}
                       loading='lazy'
+                      alt={String(index)}
                     />
                   ))}
                 </Masonry>
