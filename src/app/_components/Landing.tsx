@@ -350,12 +350,14 @@ const Landing = (props: GetPicturesResponse | undefined) => {
               >
                 <Masonry gutter='10px'>
                   {props.data.section1.map((img, index) => (
-                    <img
+                    <Image
                       src={img.src}
                       onClick={() => openLightbox(index)}
                       loading='lazy'
                       alt={String(index)}
                       key={index}
+                      width={200}
+                      height={100}
                     />
                   ))}
                 </Masonry>
@@ -363,10 +365,12 @@ const Landing = (props: GetPicturesResponse | undefined) => {
               {viewerIsOpen && (
                 <div className='lightbox-modal' onClick={closeLightbox}>
                   <div className='lightbox-content'>
-                    <img
+                    <Image
                       src={props.data.section1[currentImage].src}
                       alt={`Image ${currentImage + 1}`}
                       className='lightbox-image'
+                      width={400}
+                      height={100}
                     />
                   </div>
                 </div>
