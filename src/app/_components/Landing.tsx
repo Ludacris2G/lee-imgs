@@ -79,7 +79,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
     isFixed: boolean
   ) => {
     const imageStyle = {
-      backgroundImage: `/assets/${picNumber}.jpg`,
+      backgroundImage: `url(/2.jpg)`,
       backgroundAttachment: `${isFixed ? 'fixed' : ''}`,
       backgroundPosition: !isFixed
         ? `${horizontalPosition} ${verticalPosition}`
