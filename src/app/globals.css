@@ -54,6 +54,13 @@ body {
 .fade-in {
   opacity: 1 !important;
   transition: opacity 0.8s ease-in-out;
+  /* transform: translateY(0px); */
+}
+
+.pop-up {
+  opacity: 1 !important;
+  transition: all 0.8s ease-in-out;
+  transform: translateY(-10px);
 }
 
 .react-images__view-image--isModal {
