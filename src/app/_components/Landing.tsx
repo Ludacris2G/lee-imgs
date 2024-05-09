@@ -96,7 +96,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
   const parallaxFactor = 0.03;
 
   const parallaxStyles = {
-    backgroundImage: `../_assets/structures/2.jpg')`,
+    backgroundImage: `../_assets/structures/2.jpg`,
     backgroundAttachment: 'fixed',
     // backgroundPosition: 'center 100%',
     backgroundPosition: `center ${100 - scrollPosition * parallaxFactor}%`,
