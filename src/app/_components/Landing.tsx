@@ -25,21 +25,27 @@ const abrilFatface = Abril_Fatface({
   weight: '400',
 });
 
-const images = [
-  {
-    src: 'https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg',
-    width: 1600,
-    height: 800,
-  },
-  {
-    src: 'https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.jpg',
-    width: 1,
-    height: 1,
-  },
-];
+type ImageObject = {
+  src: string;
+};
+
+const images: ImageObject[] = [];
+
+const populateImgs = () => {
+  for (let i = 1; i <= 12; i++) {
+    const img = {
+      src: `/landing-gallery/${i}.jpg`,
+    };
+
+    images.push(img);
+  }
+
+  console.log(images[0].src);
+};
+
+populateImgs();
 
 const Landing = (props: GetPicturesResponse | undefined) => {
-  console.log(props);
   const [showFadeIns, setShowFadeIns] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
@@ -355,14 +361,14 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           )}
           className='full-width bg-black p-10'
         >
-          {props && props.data && props.data.section1 && (
+          {images && (
             <div className=''>
               {/* <PhotoAlbum layout='rows' photos={images} /> */}
               <ResponsiveMasonry
                 columnsCountBreakPoints={{ 350: 3, 750: 3, 900: 4 }}
               >
                 <Masonry gutter='10px'>
-                  {props.data.section1.map((img, index) => {
+                  {images.map((img, index) => {
                     const { width, height } = calculateImageDimensions();
                     return (
                       <Image
@@ -383,7 +389,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                 <div className='lightbox-modal' onClick={closeLightbox}>
                   <div className='lightbox-content'>
                     <Image
-                      src={props.data.section1[currentImage].src}
+                      src={images[currentImage].src}
                       alt={`Image ${currentImage + 1}`}
                       className='lightbox-image object-contain'
                       width={400}
