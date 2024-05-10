@@ -1,5 +1,12 @@
 'use client';
-import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  lazy,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { GetPicturesResponse } from '../../../types/types';
 import { Abril_Fatface } from 'next/font/google';
 import SquareIcon from '@mui/icons-material/Square';
@@ -31,19 +38,16 @@ const images = [
   },
 ];
 
-const widths = [500, 1000];
-const ratios = [1, 2, 6];
-
 const Landing = (props: GetPicturesResponse | undefined) => {
   console.log(props);
   const [showFadeIns, setShowFadeIns] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const elementsRef = useRef<Array<HTMLDivElement | null>>([]);
-  const elementsRefY = useRef<Array<HTMLDivElement | null>>([]);
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
-
+  const [windowWidth, setWindowWidth] = useState<number>(0);
   const aboutSectionRef = useRef<HTMLDivElement | null>(null);
+  const elementsRef = useRef<Array<HTMLDivElement | null>>([]);
+  const elementsRefY = useRef<Array<HTMLDivElement | null>>([]);
 
   const scrollToAbout = () => {
     aboutSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -79,7 +83,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
     isFixed: boolean
   ) => {
     const imageStyle = {
-      backgroundImage: `url(/2.jpg)`,
+      backgroundImage: `url(/landing-imgs/${picNumber}.jpg)`,
       backgroundAttachment: `${isFixed ? 'fixed' : ''}`,
       backgroundPosition: !isFixed
         ? `${horizontalPosition} ${verticalPosition}`
@@ -94,16 +98,6 @@ const Landing = (props: GetPicturesResponse | undefined) => {
 
   // was 0.1
   const parallaxFactor = 0.03;
-
-  // const parallaxStyles = {
-  //   backgroundImage: `../_assets/structures/2.jpg`,
-  //   backgroundAttachment: 'fixed',
-  //   // backgroundPosition: 'center 100%',
-  //   backgroundPosition: `center ${100 - scrollPosition * parallaxFactor}%`,
-  //   backgroundRepeat: 'no-repeat',
-  //   backgroundSize: '100%',
-  //   height: '100%',
-  // };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -179,6 +173,25 @@ const Landing = (props: GetPicturesResponse | undefined) => {
     };
   });
 
+  useLayoutEffect(() => {
+    function updateWindowWidth() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', updateWindowWidth);
+    updateWindowWidth(); // set the initial width
+    return () => window.removeEventListener('resize', updateWindowWidth);
+  }, []);
+
+  const calculateImageDimensions = () => {
+    if (windowWidth >= 1200) {
+      return { width: 400, height: 300 }; // Large screen
+    } else if (windowWidth >= 768) {
+      return { width: 300, height: 200 }; // Medium screen
+    } else {
+      return { width: 200, height: 150 }; // Small screen
+    }
+  };
+
   return (
     <div className='full-width'>
       {/* LANDING */}
@@ -235,7 +248,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
               <div className='z-10'>
                 <Image
                   ref={(el) => (elementsRefY.current[4] = el)}
-                  src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.6.jpg'
+                  src='/landing-imgs/2.6.jpg'
                   alt='Photographer Picture'
                   width={800}
                   height={0}
@@ -247,7 +260,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                 {/* CENTER IMAGE */}
                 <Image
                   ref={(el) => (elementsRefY.current[5] = el)}
-                  src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.1.jpg'
+                  src='/landing-imgs/2.1.jpg'
                   alt='Photographer Picture'
                   width={2000}
                   height={0}
@@ -261,7 +274,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
               >
                 <Image
                   ref={(el) => (elementsRef.current[6] = el)}
-                  src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/2.2.jpg'
+                  src='/landing-imgs/2.2.jpg'
                   alt='Photographer Picture'
                   width={800}
                   height={0}
@@ -321,7 +334,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           <div className='flex justify-center'>
             <Image
               ref={(el) => (elementsRefY.current[8] = el)}
-              src='https://nrrriqbsrzxkhtjbbxsf.supabase.co/storage/v1/object/public/landing/landing-imgs/3.1.jpg'
+              src='/landing-imgs/3.1.jpg'
               alt='Photographer Picture'
               width={300}
               height={0}
@@ -349,19 +362,22 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                 columnsCountBreakPoints={{ 350: 3, 750: 3, 900: 4 }}
               >
                 <Masonry gutter='10px'>
-                  {props.data.section1.map((img, index) => (
-                    <Image
-                      src={img.src}
-                      onClick={() => openLightbox(index)}
-                      loading='lazy'
-                      alt={String(index)}
-                      key={index}
-                      width={200}
-                      height={100}
-                    />
-                  ))}
+                  {props.data.section1.map((img, index) => {
+                    const { width, height } = calculateImageDimensions();
+                    return (
+                      <Image
+                        src={img.src}
+                        onClick={() => openLightbox(index)}
+                        loading='lazy'
+                        alt={String(index)}
+                        key={index}
+                        width={width}
+                        height={height}
+                        // className='object-cover'
+                      />
+                    );
+                  })}
                 </Masonry>
-                <Image src='/2.jpg' alt='' width={1000} height={1000} />
               </ResponsiveMasonry>
               {viewerIsOpen && (
                 <div className='lightbox-modal' onClick={closeLightbox}>
@@ -369,7 +385,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                     <Image
                       src={props.data.section1[currentImage].src}
                       alt={`Image ${currentImage + 1}`}
-                      className='lightbox-image'
+                      className='lightbox-image object-contain'
                       width={400}
                       height={100}
                     />
@@ -410,7 +426,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       <section>
         <div
           style={generateImageStyles(
-            'cars',
+            '5',
             'center',
             '36%',
             'fit-content',
@@ -466,7 +482,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
       <section>
         <div
           style={generateImageStyles(
-            'mountains',
+            '6',
             'center',
             '36%',
             'fit-content',
