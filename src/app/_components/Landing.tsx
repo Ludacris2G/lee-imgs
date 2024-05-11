@@ -242,13 +242,13 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           >
             Freezing Time, Unveiling Memories
           </h1>
-          <a
+          <div
             onClick={scrollToAbout}
             className='mb-20 lg:mb-5 mt-10 border-2 w-auto p-2 rounded-md m-auto hover:bg-white hover:text-black cursor-pointer translate-y-[10px] opacity-0'
-            // ref={(el) => (elementsRefY.current[1] = el)}
+            ref={(el) => (elementsRefY.current[1] = el)}
           >
             DISCOVER
-          </a>
+          </div>
           <div className='flex justify-center items-center flex-col relative'>
             <div className='flex flex-row'>
               <div className='z-10'>
@@ -316,25 +316,12 @@ const Landing = (props: GetPicturesResponse | undefined) => {
               ref={(el) => (elementsRefY.current[7] = el)}
               className='center opacity-0'
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-              temporibus dolore numquam eveniet perferendis mollitia! Ipsam
-              aliquid optio doloribus harum quidem provident, distinctio,
-              reiciendis quis laudantium reprehenderit ipsum nam neque nulla
-              dolore, esse laboriosam? Doloribus nulla consectetur, ipsa,
-              doloremque unde maiores blanditiis ratione enim cupiditate tempore
-              quaerat iure accusamus debitis. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Ipsam unde consequuntur nesciunt in
-              labore assumenda reiciendis iste velit dolore enim nemo, fuga
-              veritatis accusantium delectus quis dolor. Qui, quod fugit
-              laboriosam dolorem modi itaque nulla. Optio quis natus enim
-              ducimus sequi quasi accusantium facere amet necessitatibus, animi
-              consequuntur, aperiam fugit, doloribus quibusdam quidem
-              dignissimos nobis quo minima dolorum dolorem. Maiores rem
-              laudantium corporis perspiciatis nemo labore vero saepe ipsa
-              obcaecati quidem iure iste, delectus a, quam modi optio
-              voluptatem, nihil hic omnis assumenda explicabo? Alias fugiat sunt
-              molestiae saepe aliquam reiciendis numquam quae. Laboriosam,
-              voluptas! Consectetur perspiciatis fuga esse fugit!
+              I&apos;m Lee, a passionate photographer who&apos;s always on the
+              move to capture the perfect shot. <br />
+              <br /> With a keen eye for detail and a passion for storytelling,
+              I strive to capture the essence and beauty of every subject I
+              photograph. <br /> <br /> Let&apos;s work together to create
+              stunning images that tell your unique story!
             </p>
           </div>
           <div className='flex justify-center'>
@@ -379,7 +366,6 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                         key={index}
                         width={width}
                         height={height}
-                        // className='object-cover'
                       />
                     );
                   })}
@@ -398,33 +384,6 @@ const Landing = (props: GetPicturesResponse | undefined) => {
                   </div>
                 </div>
               )}
-              {/* <Gallery {...{ images, widths, ratios }} /> */}
-              {/* <div className='gallery-grid'>
-                {props.data.section1.map((image, index) => (
-                  <div
-                    key={index}
-                    className='gallery-item'
-                    onClick={() => openLightbox(index)}
-                  >
-                    <img src={image.src} />
-                  </div>
-                ))}
-              </div> */}
-              {/* <Gallery photos={props?.data.section1} onClick={openLightbox} /> */}
-              {/* <ModalGateway>
-                {viewerIsOpen ? (
-                  <Modal onClose={closeLightbox}>
-                    <Carousel
-                      currentIndex={currentImage}
-                      views={
-                        props?.data?.section1.map((x) => ({
-                          ...x,
-                        })) || []
-                      }
-                    />
-                  </Modal>
-                ) : null}
-              </ModalGateway> */}
             </div>
           )}
         </div>
@@ -504,26 +463,36 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           </Link>
         </div>
       </section>
-      <footer className='h-80 flex justify-center align-middle'>
-        <div className='flex space-x-2 pl-4 text-black'>
+      <footer className='h-40 flex-col flex lg:flex-row justify-center align-middle bg-black opacity-80'>
+        <div className='flex space-x-2 lg:pl-4 text-black my-auto align-middle justify-center'>
           <a target='_blank' href='https://www.instagram.com/lee.imgs/'>
-            <InstagramIcon />
+            <InstagramIcon className='text-white' />
           </a>
-          <a href='#' onClick={() => handleCopyEmail()}>
-            <EmailIcon />
+          <a onClick={() => handleCopyEmail()}>
+            <EmailIcon className='text-white cursor-pointer' />
           </a>
           <a target='_blank' href='https://ludacris2g.github.io/'>
-            <CodeIcon />
+            <CodeIcon className='text-white' />
           </a>
           <a
             target='_blank'
             href='https://www.youtube.com/channel/UCNA0BgcHQbIHaCXo6Hb5p4w'
+            className='text-white'
           >
             <YouTubeIcon />
           </a>
         </div>
-        <div>
-          <h1>© 2024 // @Lee.imgs</h1>
+        <div className='my-auto mx-auto lg:mx-0 lg:ml-4 flex flex-col md:flex-row align-middle'>
+          <h1 className=''>
+            © 2024 // Built And Designed by{' '}
+            <a target='_blanc' href='https://ludacris2g.github.io/'>
+              Lee //
+            </a>
+          </h1>
+          <br />
+          <h1 className='text-sm md:text-md my-auto mx-auto'>
+            All Rights Deserved
+          </h1>
         </div>
       </footer>
     </div>
