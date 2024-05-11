@@ -1,15 +1,19 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import CodeIcon from '@mui/icons-material/Code';
 import CameraIcon from '@mui/icons-material/Camera';
 import MenuIcon from '@mui/icons-material/Menu';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import CloseIcon from '@mui/icons-material/Close';
+import Menu from './Menu';
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const handleCopyEmail = () => {
     const email = 'lee.imgsx@gmail.com';
@@ -46,7 +50,22 @@ function Navbar() {
     };
   }, []);
 
-  useEffect(() => {}, []);
+  const handleToggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleClickOutsideMenu = (event: any) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutsideMenu);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideMenu);
+    };
+  }, []);
 
   return (
     <div
@@ -60,8 +79,8 @@ function Navbar() {
           <a target='_blank' href='https://www.instagram.com/lee.imgs/'>
             <InstagramIcon />
           </a>
-          <a href='#' onClick={() => handleCopyEmail()}>
-            <EmailIcon />
+          <a onClick={() => handleCopyEmail()}>
+            <EmailIcon className='cursor-pointer' />
           </a>
           <a target='_blank' href='https://ludacris2g.github.io/'>
             <CodeIcon />
@@ -86,8 +105,20 @@ function Navbar() {
       </div>
       {/* MENU */}
       <div>
-        <MenuIcon className='scale-150 mx-5 text-black' />
+        {menuOpen ? ( // Render the Close icon if menu is open
+          <CloseIcon
+            className='scale-150 mx-5 text-black cursor-pointer'
+            onClick={handleToggleMenu}
+          />
+        ) : (
+          <MenuIcon
+            className='scale-150 mx-5 text-black cursor-pointer'
+            onClick={handleToggleMenu}
+            style={{ display: menuOpen ? 'none' : 'block' }}
+          />
+        )}
       </div>
+      {menuOpen && <Menu forwardedRef={menuRef} />}
     </div>
   );
 }
