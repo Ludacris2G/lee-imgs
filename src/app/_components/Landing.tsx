@@ -244,7 +244,7 @@ const Landing = (props: GetPicturesResponse | undefined) => {
           </h1>
           <div
             onClick={scrollToAbout}
-            className='mb-20 lg:mb-5 mt-10 border-2 w-auto p-2 rounded-md m-auto hover:bg-white hover:text-black cursor-pointer translate-y-[10px] opacity-0'
+            className='mb-20 lg:mb-5 mt-10 border-2 w-auto p-2 rounded-md m-auto hover:bg-white hover:text-black cursor-pointer translate-y-[10px] opacity-0 pop-up'
             ref={(el) => (elementsRefY.current[1] = el)}
           >
             DISCOVER
