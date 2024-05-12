@@ -67,6 +67,10 @@ function Navbar() {
     };
   }, []);
 
+  const handleCloseMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <div
       className={`flex justify-between ${
@@ -104,7 +108,7 @@ function Navbar() {
         <h1 className='ml-[-2px] tracking-widest'>imgs</h1>
       </div>
       {/* MENU */}
-      <div>
+      <div className='z-20'>
         {menuOpen ? ( // Render the Close icon if menu is open
           <CloseIcon
             className='scale-150 mx-5 text-black cursor-pointer'
@@ -118,7 +122,9 @@ function Navbar() {
           />
         )}
       </div>
-      {menuOpen && <Menu forwardedRef={menuRef} />}
+      {menuOpen && (
+        <Menu forwardedRef={menuRef} onCloseMenu={handleCloseMenu} />
+      )}
     </div>
   );
 }
