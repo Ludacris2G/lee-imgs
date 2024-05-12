@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
-const Menu = ({ forwardedRef }: any) => {
+const Menu = ({ forwardedRef, onCloseMenu }: any) => {
   useEffect(() => {
     const handleClickOutsideMenu = (event: any) => {
-      if (forwardedRef.current && !forwardedRef.current.contains(event.target)) {
+      if (
+        forwardedRef.current &&
+        !forwardedRef.current.contains(event.target)
+      ) {
         console.log('hi');
       }
     };
@@ -16,14 +19,25 @@ const Menu = ({ forwardedRef }: any) => {
     };
   }, [forwardedRef]);
 
+  const handleLinkClick = () => {
+    onCloseMenu();
+  };
+
   return (
-    <div className='absolute top-0 right-0 bg-black p-4' ref={forwardedRef}>
+    <div
+      className='absolute top-0 right-0 bg-white p-5 pr-20 z-10 text-black'
+      ref={forwardedRef}
+    >
       <ul className='flex flex-col space-y-4'>
         <li>
-          <Link href='/'>Home</Link>
+          <Link onClick={handleLinkClick} href='/'>
+            Home
+          </Link>
         </li>
         <li>
-          <Link href='/gallery'>Gallery</Link>
+          <Link onClick={handleLinkClick} href='/gallery'>
+            Gallery
+          </Link>
         </li>
       </ul>
     </div>
